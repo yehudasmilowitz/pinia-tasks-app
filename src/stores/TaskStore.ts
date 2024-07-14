@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export type Task = {
-  id: number;
+  id: string;
   title: string;
   completed: boolean;
   isFavorite: boolean;
@@ -9,26 +9,8 @@ export type Task = {
 
 export const useTaskStore = defineStore("taskStore", {
   state: () => ({
-    tasks: [
-      {
-        id: 1,
-        title: "Learn Vue",
-        completed: false,
-        isFavorite: false,
-      },
-      {
-        id: 2,
-        title: "Learn Pinia",
-        completed: false,
-        isFavorite: false,
-      },
-      {
-        id: 3,
-        title: "Learn TypeScript",
-        completed: false,
-        isFavorite: true,
-      },
-    ] as Task[],
+    tasks: [] as Task[],
+    loading: false,
   }),
   getters: {
     favorites: (state) => {
@@ -36,14 +18,49 @@ export const useTaskStore = defineStore("taskStore", {
     },
   },
   actions: {
-    addTask(task: Task) {
-      this.tasks.push(task);
+    async getTasks() {
+      this.loading = true;
+      const response = await fetch("http://localhost:3000/tasks");
+      const data = await response.json();
+      this.tasks = data;
+      this.loading = false;
     },
-    deleteTask(id: Task["id"]) {
+    async addTask(task: Task) {
+      const response = await fetch("http://localhost:3000/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to add task");
+      }
+      const newTask = await response.json();
+      this.tasks.push(newTask);
+    },
+    async deleteTask(id: Task["id"]) {
+      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete task");
+      }
       this.tasks = this.tasks.filter((t: Task) => t.id !== id);
     },
-    toggleFavorite(task: Task) {
-      task.isFavorite = !task.isFavorite;
+    async toggleFavorite(task: Task) {
+      const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isFavorite: !task.isFavorite }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to toggle favorite");
+      }
+      const updatedTask = await response.json();
+      Object.assign(task, updatedTask);
     },
   },
 });

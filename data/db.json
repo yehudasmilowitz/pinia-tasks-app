@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "2",
+      "title": "Learn Pinia",
+      "completed": false,
+      "isFavorite": true
+    },
+    {
+      "id": "3",
+      "title": "Learn TypeScript",
+      "completed": false,
+      "isFavorite": true
+    },
+    {
+      "id": "7180",
+      "title": "Added to JSON",
+      "completed": false,
+      "isFavorite": true
+    }
+  ]
+}

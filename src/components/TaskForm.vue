@@ -15,7 +15,7 @@ const newTask = ref("");
 const addTask = () => {
   if (!newTask.value) return;
   taskStore.addTask({
-    id: Math.floor(Math.random() * 10000),
+    id: Math.floor(Math.random() * 10000).toString(),
     title: newTask.value,
     completed: false,
     isFavorite: false,
