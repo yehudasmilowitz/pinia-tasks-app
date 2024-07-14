@@ -39,14 +39,11 @@ export const useTaskStore = defineStore("taskStore", {
     addTask(task: Task) {
       this.tasks.push(task);
     },
-    removeTask(task: Task) {
+    deleteTask(task: Task) {
       this.tasks = this.tasks.filter((t: Task) => t.id !== task.id);
     },
-    updateTask(task: Task) {
-      const index = this.tasks.findIndex((t: Task) => t.id === task.id);
-      if (index !== -1) {
-        this.tasks[index] = task;
-      }
+    toggleFavorite(task: Task) {
+      task.isFavorite = !task.isFavorite;
     },
   },
 });

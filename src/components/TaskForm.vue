@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="addTask">
     <input type="text" v-model="newTask" placeholder="Enter task title" />
-    <button type="submit">Add Task</button>
+    <button type="submit">Add</button>
   </form>
 </template>
 
@@ -15,7 +15,7 @@ const newTask = ref("");
 const addTask = () => {
   if (!newTask.value) return;
   taskStore.addTask({
-    id: Date.now(),
+    id: Math.floor(Math.random() * 10000),
     title: newTask.value,
     completed: false,
     isFavorite: false,

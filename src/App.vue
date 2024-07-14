@@ -7,6 +7,8 @@
 
     <TaskForm />
 
+    <br />
+
     <nav class="filter">
       <button @click="filter = 'all'">
         All ({{ taskStore.tasks.length }})
