@@ -31,7 +31,7 @@ export const useTaskStore = defineStore("taskStore", {
     ] as Task[],
   }),
   getters: {
-    favorites(state) {
+    favorites: (state) => {
       return state.tasks.filter((t: Task) => t.isFavorite);
     },
   },
