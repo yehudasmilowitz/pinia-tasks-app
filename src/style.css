@@ -30,3 +30,34 @@ header h1 {
   color: #777;
   /* transform: rotate(2deg); */
 }
+
+.task-list {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.task {
+  padding: 6px 20px;
+  background: #fff;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task h3, .task .icons {
+  display: inline-block;
+}
+
+.task .icons {
+  text-align: right;
+}
+
+.task .icons i {
+  font-size: 1.2em;
+  margin-left: 6px;
+  cursor: pointer;
+  color: #bbb;
+}

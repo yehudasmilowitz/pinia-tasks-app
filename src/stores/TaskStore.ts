@@ -22,8 +22,19 @@ export const useTaskStore = defineStore("taskStore", {
         completed: false,
         isFavorite: false,
       },
+      {
+        id: 3,
+        title: "Learn TypeScript",
+        completed: false,
+        isFavorite: true,
+      },
     ] as Task[],
   }),
+  getters: {
+    favorites(state) {
+      return state.tasks.filter((t: Task) => t.isFavorite);
+    },
+  },
   actions: {
     addTask(task: Task) {
       this.tasks.push(task);
