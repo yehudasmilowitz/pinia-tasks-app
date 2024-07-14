@@ -39,8 +39,8 @@ export const useTaskStore = defineStore("taskStore", {
     addTask(task: Task) {
       this.tasks.push(task);
     },
-    deleteTask(task: Task) {
-      this.tasks = this.tasks.filter((t: Task) => t.id !== task.id);
+    deleteTask(id: Task["id"]) {
+      this.tasks = this.tasks.filter((t: Task) => t.id !== id);
     },
     toggleFavorite(task: Task) {
       task.isFavorite = !task.isFavorite;
