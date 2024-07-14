@@ -5,6 +5,8 @@
       <h1>Pinia Crash Course</h1>
     </header>
 
+    <TaskForm />
+
     <nav class="filter">
       <button @click="filter = 'all'">
         All ({{ taskStore.tasks.length }})
@@ -32,6 +34,7 @@
 <script setup lang="ts">
 import { useTaskStore } from "./stores/TaskStore";
 import TaskDetails from "./components/TaskDetails.vue";
+import TaskForm from "./components/TaskForm.vue";
 const taskStore = useTaskStore();
 import { ref } from "vue";
 
